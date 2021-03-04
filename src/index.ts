@@ -1,11 +1,11 @@
 #!/usr/bin/env node
-import { option, program } from 'commander';
+import { program } from 'commander';
+import { readFileSync } from 'fs';
+import { v4 as uuidv4 } from 'uuid';
 import { Authenticate } from './connect';
 import { terms } from './terms';
 import { exportsolution } from './exportsolution';
 import { importsolution } from './importsolution';
-import { readFileSync } from 'fs';
-import { v4 as uuidv4 } from 'uuid';
 
 /*
 program.version("1.0.0");
@@ -32,6 +32,7 @@ program.parse();
 const options = program.opts();
 */
 const ValidateGlobalOptions = (options: any): boolean => {
+  // eslint-disable-next-line object-curly-newline
   const { clientid, secret, username, password } = options;
   if (username && password && clientid) {
     return true;
@@ -125,20 +126,18 @@ program
         program.opts().url,
         {
           SolutionName: options.solution,
-          Managed: options.managed ? true : false,
-          ExportAutoNumberingSettings: options.exportautonumberingsettings ? true : false,
-          ExportCalendarSettings: options.exportcalendarsettings ? true : false,
-          ExportCustomizationSettings: options.exportcustomizationsettings ? true : false,
-          ExportEmailTrackingSettings: options.exportemailtrackingsettings ? true : false,
-          ExportExternalApplications: options.exportexternalapplications ? true : false,
-          ExportGeneralSettings: options.exportgeneralsettings ? true : false,
-          ExportIsvConfig: options.exportisvconfig ? true : false,
-          ExportMarketingSettings: options.exportmarketingsettings ? true : false,
-          ExportOutlookSynchronizationSettings: options.exportoutlooksynchronizationsettings
-            ? true
-            : false,
-          ExportRelationshipRoles: options.exportrelationshiproles ? true : false,
-          ExportSales: options.exportsales ? true : false,
+          Managed: !!options.managed,
+          ExportAutoNumberingSettings: !!options.exportautonumberingsettings,
+          ExportCalendarSettings: !!options.exportcalendarsettings,
+          ExportCustomizationSettings: !!options.exportcustomizationsettings,
+          ExportEmailTrackingSettings: !!options.exportemailtrackingsettings,
+          ExportExternalApplications: !!options.exportexternalapplications,
+          ExportGeneralSettings: !!options.exportgeneralsettings,
+          ExportIsvConfig: !!options.exportisvconfig,
+          ExportMarketingSettings: !!options.exportmarketingsettings,
+          ExportOutlookSynchronizationSettings: !!options.exportoutlooksynchronizationsettings,
+          ExportRelationshipRoles: !!options.exportrelationshiproles,
+          ExportSales: !!options.exportsales,
           TargetVersion: options.targetversion,
         },
         options.output,
@@ -179,13 +178,13 @@ program
       await importsolution(auth, program.opts().url, {
         CustomizationFile: readFileSync(options.zipfile, { encoding: 'base64' }),
         ImportJobId: uuidv4(),
-        OverwriteUnmanagedCustomizations: options.overwriteunmanagedcustomizations ? true : false,
-        PublishWorkflows: options.publishworkflows ? true : false,
-        AsyncRibbonProcessing: options.asyncribbonprocessing ? true : false,
-        ConvertToManaged: options.converttomanaged ? true : false,
-        HoldingSolution: options.holdingsolution ? true : false,
-        SkipProductUpdateDependencies: options.skipproductupdatedependencies ? true : false,
-        SkipQueueRibbonJob: options.skipqueueribbonjob ? true : false,
+        OverwriteUnmanagedCustomizations: !!options.overwriteunmanagedcustomizations,
+        PublishWorkflows: !!options.publishworkflows,
+        AsyncRibbonProcessing: !!options.asyncribbonprocessing,
+        ConvertToManaged: !!options.converttomanaged,
+        HoldingSolution: !!options.holdingsolution,
+        SkipProductUpdateDependencies: !!options.skipproductupdatedependencies,
+        SkipQueueRibbonJob: !!options.skipqueueribbonjob,
       });
     }
   });

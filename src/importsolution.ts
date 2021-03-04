@@ -1,8 +1,19 @@
 import { TokenResponse } from 'adal-node';
-import { initHeader } from './header';
-import fetch, { Response } from 'node-fetch';
-import { mkdirSync, writeFile, writeFileSync } from 'fs';
+import fetch from 'node-fetch';
 import ProgressBar from 'progress';
+import { initHeader } from './header';
+
+interface importoptions {
+  OverwriteUnmanagedCustomizations: boolean;
+  PublishWorkflows: boolean;
+  CustomizationFile: string;
+  ImportJobId: string;
+  ConvertToManaged?: boolean;
+  SkipProductUpdateDependencies?: boolean;
+  HoldingSolution?: boolean;
+  SkipQueueRibbonJob?: boolean;
+  AsyncRibbonProcessing?: boolean;
+}
 
 export const importsolution = async (
   authToken: TokenResponse,
@@ -11,7 +22,7 @@ export const importsolution = async (
 ): Promise<void> => {
   const bar = new ProgressBar('Importing :bar :elapsed seconds', { total: 50 });
   let barReverse = false;
-  const timer = setInterval(function () {
+  const timer = setInterval(() => {
     bar.tick(barReverse ? -1 : 1);
     if (bar.curr === bar.total - 1 || bar.curr <= 1) {
       barReverse = !(bar.curr <= 1);
@@ -37,14 +48,4 @@ export const importsolution = async (
   }
 };
 
-interface importoptions {
-  OverwriteUnmanagedCustomizations: boolean;
-  PublishWorkflows: boolean;
-  CustomizationFile: string;
-  ImportJobId: string;
-  ConvertToManaged?: boolean;
-  SkipProductUpdateDependencies?: boolean;
-  HoldingSolution?: boolean;
-  SkipQueueRibbonJob?: boolean;
-  AsyncRibbonProcessing?: boolean;
-}
+export default importsolution;

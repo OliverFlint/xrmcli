@@ -5,3 +5,5 @@ export const initHeader = (accessToken: string): any => ({
   'OData-MaxVersion': '4.0',
   'OData-Version': '4.0',
 });
+
+export default initHeader;

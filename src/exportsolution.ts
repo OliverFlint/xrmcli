@@ -1,8 +1,25 @@
 import { TokenResponse } from 'adal-node';
-import { initHeader } from './header';
-import fetch, { Response } from 'node-fetch';
-import { mkdirSync, writeFile, writeFileSync } from 'fs';
+import fetch from 'node-fetch';
+import { mkdirSync, writeFileSync } from 'fs';
 import ProgressBar from 'progress';
+import { initHeader } from './header';
+
+interface exportoptions {
+  SolutionName: string;
+  Managed: boolean;
+  TargetVersion?: string;
+  ExportAutoNumberingSettings?: boolean;
+  ExportCalendarSettings?: boolean;
+  ExportCustomizationSettings?: boolean;
+  ExportEmailTrackingSettings?: boolean;
+  ExportGeneralSettings?: boolean;
+  ExportMarketingSettings?: boolean;
+  ExportOutlookSynchronizationSettings?: boolean;
+  ExportRelationshipRoles?: boolean;
+  ExportIsvConfig?: boolean;
+  ExportSales?: boolean;
+  ExportExternalApplications?: boolean;
+}
 
 export const exportsolution = async (
   authToken: TokenResponse,
@@ -12,7 +29,7 @@ export const exportsolution = async (
 ): Promise<void> => {
   const bar = new ProgressBar('Exporting :bar :elapsed seconds', { total: 50 });
   let barReverse = false;
-  const timer = setInterval(function () {
+  const timer = setInterval(() => {
     bar.tick(barReverse ? -1 : 1);
     if (bar.curr === bar.total - 1 || bar.curr <= 1) {
       barReverse = !(bar.curr <= 1);
@@ -43,19 +60,4 @@ export const exportsolution = async (
   }
 };
 
-interface exportoptions {
-  SolutionName: string;
-  Managed: boolean;
-  TargetVersion?: string;
-  ExportAutoNumberingSettings?: boolean;
-  ExportCalendarSettings?: boolean;
-  ExportCustomizationSettings?: boolean;
-  ExportEmailTrackingSettings?: boolean;
-  ExportGeneralSettings?: boolean;
-  ExportMarketingSettings?: boolean;
-  ExportOutlookSynchronizationSettings?: boolean;
-  ExportRelationshipRoles?: boolean;
-  ExportIsvConfig?: boolean;
-  ExportSales?: boolean;
-  ExportExternalApplications?: boolean;
-}
+export default exportsolution;
