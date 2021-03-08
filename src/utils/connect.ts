@@ -1,4 +1,6 @@
 import { AuthenticationContext, ErrorResponse, TokenResponse } from 'adal-node';
+import { program } from 'commander';
+import terms from './terms';
 
 const authenticateWithUsernamePassword = (
   tenent: string,
@@ -63,6 +65,20 @@ export const Authenticate = (options: any): Promise<TokenResponse> => {
     return authenticateWithClientSecret(tenent, url, clientid, secret);
   }
   throw new Error('Invalid authetication options!');
+};
+
+export const AddAuthCommandOptions = () => {
+  program
+    .requiredOption('-u, --url <url>', `${terms.d365} Url. e.g. https://myorg.crm11.dynamics.com/`)
+    .option('-n, --username <username>', `Username for ${terms.d365}`)
+    .option('-p, --password <password>', `Password for ${terms.d365}`)
+    .option('-cs, --secret <secret>', 'OAuth Client Secret')
+    .requiredOption(
+      '-t, --tenent <tenent>',
+      `${terms.AAD} authority. e.g. https://login.windows.net/myorg.onmicrosoft.com`,
+    )
+    .option('-c, --clientid <clientid>', 'OAuth Client Id', '51f81489-12ee-4a9e-aaae-a2591f45987d')
+    .addHelpText('after', terms.AuthHelp);
 };
 
 export default Authenticate;

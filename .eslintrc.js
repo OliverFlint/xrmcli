@@ -21,5 +21,5 @@ module.exports = {
       typescript: {},
     },
   },
-  ignorePatterns: ['*.d.ts', '*.hbs'],
+  ignorePatterns: ['*.d.ts', 'lib/**/*'],
 };
