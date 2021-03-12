@@ -18,6 +18,9 @@ program
   .command('export', 'Export record(s)', {
     executableFile: './data/export',
   })
+  .command('import', 'Import record(s)', {
+    executableFile: './data/import',
+  })
   .action(() => {
     program.help();
   });

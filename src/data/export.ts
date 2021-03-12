@@ -36,10 +36,15 @@ const exportrecords = async (
       if (json.error) {
         console.error(`\n${json.error.message}`);
       } else {
+        console.log(json);
         mkdirSync(output.replace(/(?:.(?!\/|\\))+/, ''), {
           recursive: true,
         });
-        writeFileSync(output, JSON.stringify(json.value), { encoding: 'utf8' });
+        const exportdata = {
+          table,
+          records: json.value,
+        };
+        writeFileSync(output, JSON.stringify(exportdata), { encoding: 'utf8' });
         console.log('\nRecord(s) exported');
       }
     }

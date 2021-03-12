@@ -1,6 +1,6 @@
 {
   "name": "xrmcli",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A suite of cli tools to support Xrm/D365/Dataverse development",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,7 +9,6 @@
     "format": "node_modules/.bin/prettier src/**/*.ts --write"
   },
   "keywords": [
-    "tools",
     "xrm",
     "dynamics-365",
     "dynamics",
@@ -18,13 +17,23 @@
     "powerapps",
     "power",
     "platform",
-    "power-platform"
+    "power-platform",
+    "cli"
   ],
   "author": "Oliver Flint <oliverflint@gmail.com>",
   "license": "MIT",
+  "main": "./lib/index.js",
   "bin": "./lib/index.js",
   "engines": {
     "node": "^12.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OliverFlint/xrmcli"
+  },
+  "homepage": "https://github.com/OliverFlint/xrmcli#readme",
+  "bugs": {
+    "url": "https://github.com/OliverFlint/xrmcli/issues"
   },
   "dependencies": {
     "adal-node": "^0.2.2",
@@ -47,5 +56,8 @@
     "eslint-import-resolver-typescript": "^2.3.0",
     "eslint-plugin-import": "^2.22.1",
     "prettier": "^2.2.1"
-  }
+  },
+  "files": [
+    "lib/**/*"
+  ]
 }
