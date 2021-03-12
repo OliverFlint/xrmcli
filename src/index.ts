@@ -8,6 +8,7 @@ program
     executableFile: './solution',
   })
   .command('publish', 'publish customizations', { executableFile: './publish' })
-  .command('data', 'perform data commands', { executableFile: './data' });
+  .command('data', 'perform data commands', { executableFile: './data' })
+  .command('deploy', 'deploy plugins, web resources, etc.', { executableFile: './deploy' });
 
 program.parseAsync();
