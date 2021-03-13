@@ -1,6 +1,9 @@
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/oliverflint/xrmcli/Build?logo=github&style=flat-square)](https://github.com/OliverFlint/xrmcli/actions/workflows/Build.yml)
 [![npm](https://img.shields.io/npm/v/xrmcli?logo=npm&style=flat-square)](https://www.npmjs.com/package/xrmcli)
+[![GitHub issues](https://img.shields.io/github/issues/oliverflint/xrmcli?logo=github&style=flat-square)](https://github.com/OliverFlint/xrmcli/issues)
 [![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/oliverflint/xrmcli?logo=snyk&style=flat-square)](https://app.snyk.io/org/oliverflint/project/bedbb9d7-a289-41b3-be0f-a91e6bb39ae8)
+![GitHub Repo stars](https://img.shields.io/github/stars/oliverflint/xrmcli?logo=github&style=flat-square)
+![GitHub forks](https://img.shields.io/github/forks/oliverflint/xrmcli?logo=github&style=flat-square)
 
 # XrmCli
 
