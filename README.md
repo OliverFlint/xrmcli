@@ -1,3 +1,4 @@
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/oliverflint/xrmcli/Build?logo=github&style=flat-square)](https://github.com/OliverFlint/xrmcli/actions/workflows/Build.yml)
 [![npm](https://img.shields.io/npm/v/xrmcli?logo=npm&style=flat-square)](https://www.npmjs.com/package/xrmcli)
 [![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/oliverflint/xrmcli?logo=snyk&style=flat-square)](https://app.snyk.io/org/oliverflint/project/bedbb9d7-a289-41b3-be0f-a91e6bb39ae8)
 
