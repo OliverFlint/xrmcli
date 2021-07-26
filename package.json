@@ -44,7 +44,7 @@
   },
   "devDependencies": {
     "@types/commander": "^2.12.2",
-    "@types/node": "^14.14.31",
+    "@types/node": "^16.4.3",
     "@types/node-fetch": "^2.5.8",
     "@types/progress": "^2.0.3",
     "@types/uuid": "^8.3.0",
