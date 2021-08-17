@@ -12,13 +12,7 @@ program
   .action(async (options) => {
     try {
       const { name, template, xrmtypesgen } = options;
-      let templatename = '';
-      if (template === 'tsc' && !xrmtypesgen) {
-        templatename = 'tsc';
-      } else if (template === 'tsc' && xrmtypesgen) {
-        templatename = 'tsc-xtg';
-      }
-      const downloadsource = `https://github.com/OliverFlint/xrmcli-code-template-${templatename}/archive/refs/heads/main.zip`;
+      const downloadsource = `https://github.com/OliverFlint/xrmcli-code-template-${template}/archive/refs/heads/main.zip`;
       const zipfile = await fetch(downloadsource);
       const downloadPromise = new Promise<any>((resolve, reject) => {
         try {
@@ -36,7 +30,7 @@ program
         return;
       }
 
-      copySync(`./_template/xrmcli-code-template-${templatename}-main`, './', { recursive: true });
+      copySync(`./_template/xrmcli-code-template-${template}-main`, './', { recursive: true });
       removeSync('./_template');
 
       const packagejson = JSON.parse(readFileSync('./package.json', { encoding: 'utf8' }));
@@ -44,6 +38,10 @@ program
       writeFileSync('./package.json', JSON.stringify(packagejson));
 
       child_process.execSync('npm install', { stdio: 'inherit' });
+
+      if (xrmtypesgen) {
+        child_process.execSync('npm install xrmtypesgen --save-dev', { stdio: 'inherit' });
+      }
 
       console.log('Finished.');
     } catch (err) {
