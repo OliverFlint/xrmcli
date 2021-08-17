@@ -1,19 +1,54 @@
 import { program } from 'commander';
+import fetch from 'node-fetch';
+import { copySync, removeSync, writeFileSync, readFileSync } from 'fs-extra';
+import { Extract } from 'unzipper';
+import child_process from 'child_process';
 
 program.name('xrmcli code typescript');
 program
-  .option('--name', 'Project name', 'Webresources')
-  .option('--template', 'Template type (tsc, webpack, esbuild)', 'tsc')
+  .option('--name <name>', 'Project name', 'Webresources')
+  .option('--template <template>', 'Template type (tsc, webpack, esbuild)', 'tsc')
   .option('--xrmtypesgen', 'Include XrmTypesGen', false)
   .action(async (options) => {
-    const { name, template, xrmtypesgen } = options;
-    let templatename = 'tsc';
-    if (template === 'tsc' && !xrmtypesgen) {
-      templatename = 'tsc';
-    } else if (template === 'tsc' && xrmtypesgen) {
-      templatename = 'tsc-xtg';
+    try {
+      const { name, template, xrmtypesgen } = options;
+      let templatename = '';
+      if (template === 'tsc' && !xrmtypesgen) {
+        templatename = 'tsc';
+      } else if (template === 'tsc' && xrmtypesgen) {
+        templatename = 'tsc-xtg';
+      }
+      const downloadsource = `https://github.com/OliverFlint/xrmcli-code-template-${templatename}/archive/refs/heads/main.zip`;
+      const zipfile = await fetch(downloadsource);
+      const downloadPromise = new Promise<any>((resolve, reject) => {
+        try {
+          zipfile.body.pipe(Extract({ path: './_template' })).on('close', () => {
+            resolve(true);
+          });
+        } catch (err) {
+          console.log(`Template download failed! ${err}`);
+          reject(err);
+        }
+      });
+      const downloaded = await downloadPromise;
+      if (!downloaded) {
+        console.log('Template download failed!');
+        return;
+      }
+
+      copySync(`./_template/xrmcli-code-template-${templatename}-main`, './', { recursive: true });
+      removeSync('./_template');
+
+      const packagejson = JSON.parse(readFileSync('./package.json', { encoding: 'utf8' }));
+      packagejson.name = name;
+      writeFileSync('./package.json', JSON.stringify(packagejson));
+
+      child_process.execSync('npm install', { stdio: 'inherit' });
+
+      console.log('Finished.');
+    } catch (err) {
+      console.log(`Code template command failed! ${err}`);
     }
-    const downloadsource = `https://github.com/OliverFlint/xrmcli-code-template-${templatename}/archive/refs/heads/main.zip`;
   });
 
 program.parseAsync();

@@ -121,3 +121,4 @@ dist
 .vscode
 output
 lib
+.test
