@@ -8,6 +8,7 @@ program
   .command('publish', 'publish customizations', { executableFile: './publish' })
   .command('solution', 'solution commands e.g. import, extprt, ...', {
     executableFile: './solution',
-  });
+  })
+  .command('code', 'create new code projects', { executableFile: './code' });
 
 program.parseAsync();

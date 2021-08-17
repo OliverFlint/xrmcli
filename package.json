@@ -5,6 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "./node_modules/.bin/tsc",
+    "build:watch": "./node_modules/.bin/tsc --watch",
     "lint": "node_modules/.bin/eslint src/**/*",
     "format": "node_modules/.bin/prettier src/**/*.ts --write"
   },
