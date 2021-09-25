@@ -9,7 +9,7 @@ program
   .option('--name <name>', 'Project name', 'Webresources')
   .option('--template <template>', 'Template type (tsc, webpack, esbuild)', 'tsc')
   .option('--xrmtypesgen', 'Include XrmTypesGen', false)
-  .action(async (options) => {
+  .action(async (options: any) => {
     try {
       const { name, template, xrmtypesgen } = options;
       const downloadsource = `https://github.com/OliverFlint/xrmcli-code-template-${template}/archive/refs/heads/main.zip`;

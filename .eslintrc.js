@@ -15,6 +15,8 @@ module.exports = {
     'import/extensions': 'off',
     'operator-linebreak': 'off',
     indent: 'off',
+    'object-curly-newline': 'off',
+    camelcase: 'off',
   },
   settings: {
     'import/resolver': {
