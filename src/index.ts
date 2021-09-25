@@ -6,7 +6,7 @@ program.name('xrmcli').version(require('../package.json').version);
 program
   .command('data', 'perform data commands', { executableFile: './data' })
   .command('publish', 'publish customizations', { executableFile: './publish' })
-  .command('solution', 'solution commands e.g. import, extprt, ...', {
+  .command('solution', 'solution commands e.g. import, export, ...', {
     executableFile: './solution',
   })
   .command('code', 'create new code projects', { executableFile: './code' });
