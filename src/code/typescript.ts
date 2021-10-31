@@ -9,9 +9,29 @@ program
   .option('--name <name>', 'Project name', 'Webresources')
   .option('--template <template>', 'Template type (tsc, webpack, esbuild)', 'tsc')
   .option('--xrmtypesgen', 'Include XrmTypesGen', false)
+  .option('--list', 'List available templates', false)
   .action(async (options: any) => {
     try {
-      const { name, template, xrmtypesgen } = options;
+      const { name, template, xrmtypesgen, list } = options;
+      const response = await fetch(
+        'https://api.github.com/search/repositories?q=xrmcli-code-template-',
+      );
+      const json = await response.json();
+      const names = json.items.map((value: any) => {
+        return {
+          url: value.url,
+          branch: value.default_branch,
+          name: value.name.replace('xrmcli-code-template-', ''),
+        };
+      });
+
+      if (list) {
+        names.forEach((element: any) => {
+          console.log(element.name);
+        });
+        return;
+      }
+
       const downloadsource = `https://github.com/OliverFlint/xrmcli-code-template-${template}/archive/refs/heads/main.zip`;
       const zipfile = await fetch(downloadsource);
       const downloadPromise = new Promise<any>((resolve, reject) => {
