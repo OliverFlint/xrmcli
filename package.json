@@ -38,7 +38,7 @@
   "dependencies": {
     "adal-node": "^0.2.2",
     "commander": "^8.2.0",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^3.2.0",
     "progress": "^2.0.3",
     "uuid": "^8.3.2"
   },
