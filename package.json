@@ -4,9 +4,10 @@
   "description": "A suite of cli tools to support Xrm/D365/Dataverse development",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "./node_modules/.bin/tsc",
-    "lint": "node_modules/.bin/eslint src/**/*",
-    "format": "node_modules/.bin/prettier src/**/*.ts --write"
+    "build": "npx tsc",
+    "build:watch": "npx tsc --watch",
+    "lint": "npx eslint src/**/*",
+    "format": "npx prettier src/**/*.ts --write"
   },
   "keywords": [
     "xrm",
@@ -38,24 +39,28 @@
   "dependencies": {
     "adal-node": "^0.2.2",
     "commander": "^8.2.0",
+    "fs-extra": "^10.0.0",
     "node-fetch": "^2.6.1",
     "progress": "^2.0.3",
+    "unzipper": "^0.10.11",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/commander": "^2.12.2",
+    "@types/fs-extra": "^9.0.13",
     "@types/node": "^16.9.6",
     "@types/node-fetch": "^2.5.8",
     "@types/progress": "^2.0.3",
+    "@types/unzipper": "^0.10.4",
     "@types/uuid": "^8.3.0",
-    "typescript": "^4.2.2",
     "@typescript-eslint/eslint-plugin": "^4.14.2",
     "@typescript-eslint/parser": "^4.14.2",
     "eslint": "^7.19.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-import-resolver-typescript": "^2.3.0",
     "eslint-plugin-import": "^2.22.1",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "typescript": "^4.2.2"
   },
   "files": [
     "lib/**/*"
