@@ -9,6 +9,7 @@ program
   .command('solution', 'solution commands e.g. import, export, ...', {
     executableFile: './solution',
   })
-  .command('code', 'create new code projects', { executableFile: './code' });
-
+  .command('typescript', 'Create new TypeScript Webresource projects', {
+    executableFile: './typescript',
+  });
 program.parseAsync();

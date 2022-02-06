@@ -4,39 +4,42 @@ import { copySync, removeSync, writeFileSync, readFileSync } from 'fs-extra';
 import { Extract } from 'unzipper';
 import child_process from 'child_process';
 
-program.name('xrmcli code typescript');
+program.name('xrmcli typescript create');
 program
   .option('--name <name>', 'Project name', 'Webresources')
-  .option('--template <template>', 'Template type (tsc, webpack, esbuild)', 'tsc')
+  .requiredOption('--template <template>', 'Template type (tsc, webpack, esbuild)')
   .option('--xrmtypesgen', 'Include XrmTypesGen', false)
-  .option('--list', 'List available templates', false)
+  .option('--path <path>', 'Path to create project', './')
   .action(async (options: any) => {
     try {
-      const { name, template, xrmtypesgen, list } = options;
+      const { name, template, xrmtypesgen, path } = options;
+      console.log(path);
       const response = await fetch(
         'https://api.github.com/search/repositories?q=xrmcli-code-template-',
       );
       const json = await response.json();
       const names = json.items.map((value: any) => {
         return {
-          url: value.url,
+          url: value.svn_url,
           branch: value.default_branch,
           name: value.name.replace('xrmcli-code-template-', ''),
         };
+      }) as { url: string; branch: string; name: string }[];
+
+      const repo = names.find((value) => {
+        return value.name == template;
       });
 
-      if (list) {
-        names.forEach((element: any) => {
-          console.log(element.name);
-        });
+      if (!repo || !repo.url || !repo.name || !repo.branch) {
+        console.log(`Template '${template}' not found!`);
         return;
       }
 
-      const downloadsource = `https://github.com/OliverFlint/xrmcli-code-template-${template}/archive/refs/heads/main.zip`;
+      const downloadsource = `${repo?.url}/archive/refs/heads/${repo?.branch}.zip`;
       const zipfile = await fetch(downloadsource);
       const downloadPromise = new Promise<any>((resolve, reject) => {
         try {
-          zipfile.body.pipe(Extract({ path: './_template' })).on('close', () => {
+          zipfile.body.pipe(Extract({ path: `${path}/_template` })).on('close', () => {
             resolve(true);
           });
         } catch (err) {
@@ -50,17 +53,22 @@ program
         return;
       }
 
-      copySync(`./_template/xrmcli-code-template-${template}-main`, './', { recursive: true });
-      removeSync('./_template');
+      copySync(`${path}/_template/xrmcli-code-template-${template}-main`, `${path}/`, {
+        recursive: true,
+      });
+      removeSync(`${path}/_template`);
 
-      const packagejson = JSON.parse(readFileSync('./package.json', { encoding: 'utf8' }));
+      const packagejson = JSON.parse(readFileSync(`${path}/package.json`, { encoding: 'utf8' }));
       packagejson.name = name;
-      writeFileSync('./package.json', JSON.stringify(packagejson));
+      writeFileSync(`${path}/package.json`, JSON.stringify(packagejson));
 
-      child_process.execSync('npm install', { stdio: 'inherit' });
+      child_process.execSync('npm install', { stdio: 'inherit', cwd: `${path}/` });
 
       if (xrmtypesgen) {
-        child_process.execSync('npm install xrmtypesgen --save-dev', { stdio: 'inherit' });
+        child_process.execSync('npm install xrmtypesgen --save-dev', {
+          stdio: 'inherit',
+          cwd: `${path}/`,
+        });
       }
 
       console.log('Finished.');
@@ -68,5 +76,4 @@ program
       console.log(`Code template command failed! ${err}`);
     }
   });
-
 program.parseAsync();
