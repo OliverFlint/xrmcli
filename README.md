@@ -49,5 +49,3 @@ Commands:
 |          | patch       | Creates a solution patch from a managed or unmanaged solution                                                   |
 |          | clone       | Creates a new copy of an unmanaged solution that contains the original solution plus all of its patches         |
 | code     | typescript  | Creates a new typescript webresource project with different compiler/transpiler options (tsc, esbuild, webpack) |
-|          | plugin      | Creates a new plugin project                                                                                    |
-|          | workflow    | Creates a new custom workflow activity project                                                                  |
