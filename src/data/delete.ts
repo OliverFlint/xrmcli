@@ -34,7 +34,7 @@ const deleterecord = async (
         console.error(`\nError deleting record. ${result.statusText}`);
       }
     }
-  } catch (e) {
+  } catch (e: any) {
     console.error(`\n${e.message || 'Error deleting record.'}`);
   } finally {
     clearInterval(timer);

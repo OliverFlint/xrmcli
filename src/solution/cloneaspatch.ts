@@ -39,7 +39,7 @@ const clonepatch = async (
         console.log(`\nSolution cloned as patch with id ${json.SolutionId}`);
       }
     }
-  } catch (e) {
+  } catch (e: any) {
     console.error(`\n${e.message || 'Error cloneing patch.'}`);
   } finally {
     clearInterval(timer);

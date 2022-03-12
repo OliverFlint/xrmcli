@@ -1,21 +1,21 @@
 import { program } from 'commander';
 import fetch from 'node-fetch';
+import { mkdirSync, writeFileSync } from 'fs';
 import initHeader from '../utils/header';
 import Authenticate, { AddAuthCommandOptions } from '../utils/connect';
 import ValidateConnectionOptions from '../utils/validation';
-import { mkdirSync, writeFileSync } from 'fs';
 import IWebresourceConfig from '../utils/wrconfig';
 
 const saveToDisk = (webresource: any, outputPath: string) => {
-  const { name, webresourcetype, content, displayname } = webresource;
+  const { name, content, displayname } = webresource;
   console.log(`Saving ${displayname}...`);
-  const path = (name as string).substring(0, (name as string).lastIndexOf(`/`));
+  const path = (name as string).substring(0, (name as string).lastIndexOf('/'));
   mkdirSync(`${outputPath}/${path}`, { recursive: true });
   writeFileSync(`${outputPath}/${name}`, content, { encoding: 'base64' });
 };
 
 const saveConfig = (config: IWebresourceConfig, outputPath: string) => {
-  console.log(`Saving config...`);
+  console.log('Saving config...');
   const configString = JSON.stringify(config, undefined, 2);
   writeFileSync(`${outputPath}/webresource.config.json`, configString, { encoding: 'utf-8' });
 };
@@ -44,9 +44,7 @@ program
           throw new Error(`${solution} contains no webresources`);
         }
         const webresourceids = (jsonResult.value[0].solution_solutioncomponent as [])?.map(
-          (value: any) => {
-            return value.objectid as string;
-          },
+          (value: any) => value.objectid as string,
         );
 
         // export each webresource to disk
@@ -77,7 +75,7 @@ program
         });
         saveConfig(config, path);
       }
-    } catch (e) {
+    } catch (e: any) {
       console.error(`${e.message || 'Error exporting webresources.'}`);
     }
   });

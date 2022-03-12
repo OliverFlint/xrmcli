@@ -18,17 +18,13 @@ program
         'https://api.github.com/search/repositories?q=xrmcli-code-template-',
       );
       const json = await response.json();
-      const names = json.items.map((value: any) => {
-        return {
-          url: value.svn_url,
-          branch: value.default_branch,
-          name: value.name.replace('xrmcli-code-template-', ''),
-        };
-      }) as { url: string; branch: string; name: string }[];
+      const names = json.items.map((value: any) => ({
+        url: value.svn_url,
+        branch: value.default_branch,
+        name: value.name.replace('xrmcli-code-template-', ''),
+      })) as { url: string; branch: string; name: string }[];
 
-      const repo = names.find((value) => {
-        return value.name == template;
-      });
+      const repo = names.find((value) => value.name === template);
 
       if (!repo || !repo.url || !repo.name || !repo.branch) {
         console.log(`Template '${template}' not found!`);

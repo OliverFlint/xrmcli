@@ -27,7 +27,7 @@ const publishall = async (authToken: TokenResponse, url: string): Promise<void> 
         console.error(`\nError publishing customizations. ${result.statusText}`);
       }
     }
-  } catch (e) {
+  } catch (e: any) {
     console.error(`\n${e.message || 'Error publishing customizations.'}`);
   } finally {
     clearInterval(timer);

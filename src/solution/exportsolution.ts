@@ -56,7 +56,7 @@ const exportsolution = async (
         console.log('\nSolution exported');
       }
     }
-  } catch (e) {
+  } catch (e: any) {
     console.error(`\n${e.message || 'Error exporting solution.'}`);
   } finally {
     clearInterval(timer);

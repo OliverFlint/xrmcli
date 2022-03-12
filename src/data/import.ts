@@ -63,7 +63,7 @@ const exportrecords = async (
         }
       }
     }
-  } catch (e) {
+  } catch (e: any) {
     console.error(`\n${e.message || 'Error importing reacord(s).'}`);
   }
 };

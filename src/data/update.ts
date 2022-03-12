@@ -36,7 +36,7 @@ const update = async (
         console.error(`\nError updating record. ${result.statusText}`);
       }
     }
-  } catch (e) {
+  } catch (e: any) {
     console.error(`\n${e.message || 'Error updating record.'}`);
   } finally {
     clearInterval(timer);

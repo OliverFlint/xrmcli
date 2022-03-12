@@ -46,7 +46,7 @@ const importsolution = async (
         console.error(`\nError importing solution. ${result.statusText}`);
       }
     }
-  } catch (e) {
+  } catch (e: any) {
     console.error(`\n${e.message || 'Error importing solution.'}`);
   } finally {
     clearInterval(timer);

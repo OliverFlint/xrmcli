@@ -37,7 +37,7 @@ const read = async (
         console.log(`\n${JSON.stringify(json.value)}`);
       }
     }
-  } catch (e) {
+  } catch (e: any) {
     console.error(`\n${e.message || 'Error reading reacord(s).'}`);
   } finally {
     clearInterval(timer);

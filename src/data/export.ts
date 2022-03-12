@@ -48,7 +48,7 @@ const exportrecords = async (
         console.log('\nRecord(s) exported');
       }
     }
-  } catch (e) {
+  } catch (e: any) {
     console.error(`\n${e.message || 'Error exporting reacord(s).'}`);
   } finally {
     clearInterval(timer);

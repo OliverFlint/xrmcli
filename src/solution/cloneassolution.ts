@@ -39,7 +39,7 @@ const clonesolution = async (
         console.log(`\nSolution cloned with id ${json.SolutionId}`);
       }
     }
-  } catch (e) {
+  } catch (e: any) {
     console.error(`\n${e.message || 'Error cloneing solution.'}`);
   } finally {
     clearInterval(timer);
