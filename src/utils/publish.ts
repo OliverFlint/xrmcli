@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 import ProgressBar from 'progress';
-import { initHeader } from '../utils/header';
 import { TokenResponse } from 'adal-node';
+import { initHeader } from './header';
 
 export const publishsome = async (
   authToken: TokenResponse,
@@ -31,7 +31,7 @@ export const publishsome = async (
         console.error(`\nError publishing customizations. ${result.statusText}`);
       }
     }
-  } catch (e) {
+  } catch (e: any) {
     console.error(`\n${e.message || 'Error publishing customizations.'}`);
   } finally {
     clearInterval(timer);

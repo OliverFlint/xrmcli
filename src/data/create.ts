@@ -35,7 +35,7 @@ const create = async (
         console.error(`\nError creating record. ${result.statusText}`);
       }
     }
-  } catch (e) {
+  } catch (e: any) {
     console.error(`\n${e.message || 'Error creating record.'}`);
   } finally {
     clearInterval(timer);

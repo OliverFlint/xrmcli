@@ -2,7 +2,7 @@ import { program } from 'commander';
 
 program
   .name('xrmcli')
-  .description('Create new TypeScript Webresource projects')
+  .description('Work with TypeScript Webresource projects')
   .usage('typescript [options] [command]')
   .command('list', 'List available templates', { executableFile: './typescript/list' })
   .command('create', 'Create a project', {
