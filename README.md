@@ -30,22 +30,25 @@ Commands:
   data            perform data commands
   publish         publish customizations
   solution        solution commands e.g. import, export, ...
-  code            create new code projects
+  typescript      work with typescript webresource projects
   help [command]  display help for command
 ```
 
-| Command  | Sub command | Description                                                                                                     |
-| -------- | ----------- | --------------------------------------------------------------------------------------------------------------- |
-| data     | create      | Create a record                                                                                                 |
-|          | read        | Read record(s)                                                                                                  |
-|          | update      | Update a record (incl. upsert)                                                                                  |
-|          | delete      | Delete a record                                                                                                 |
-|          | export      | Export record(s)                                                                                                |
-|          | import      | Import record(s)                                                                                                |
-| publish  | all         | Publishes all changes to solution components                                                                    |
-|          | some        | Publishes specified solution components                                                                         |
-| solution | export      | Exports a solution                                                                                              |
-|          | import      | Imports a solution                                                                                              |
-|          | patch       | Creates a solution patch from a managed or unmanaged solution                                                   |
-|          | clone       | Creates a new copy of an unmanaged solution that contains the original solution plus all of its patches         |
-| code     | typescript  | Creates a new typescript webresource project with different compiler/transpiler options (tsc, esbuild, webpack) |
+| Command    | Sub command | Description                                                                                                     |
+| ---------- | ----------- | --------------------------------------------------------------------------------------------------------------- |
+| data       | create      | Create a record                                                                                                 |
+|            | read        | Read record(s)                                                                                                  |
+|            | update      | Update a record (incl. upsert)                                                                                  |
+|            | delete      | Delete a record                                                                                                 |
+|            | export      | Export record(s)                                                                                                |
+|            | import      | Import record(s)                                                                                                |
+| publish    | all         | Publishes all changes to solution components                                                                    |
+|            | some        | Publishes specified solution components                                                                         |
+| solution   | export      | Exports a solution                                                                                              |
+|            | import      | Imports a solution                                                                                              |
+|            | patch       | Creates a solution patch from a managed or unmanaged solution                                                   |
+|            | clone       | Creates a new copy of an unmanaged solution that contains the original solution plus all of its patches         |
+| typescript | list        | List available templates for use when creating a new project                                                    |
+|            | create      | Creates a new typescript webresource project with different compiler/transpiler options (tsc, esbuild, webpack) |
+|            | export      | Export webresources from dataverse                                                                              |
+|            | deploy      | Deploy webresources to dataverse                                                                                |
