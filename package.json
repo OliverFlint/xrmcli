@@ -40,7 +40,7 @@
     "adal-node": "^0.2.2",
     "commander": "^9.0.0",
     "fs-extra": "^10.0.0",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^3.2.5",
     "progress": "^2.0.3",
     "unzipper": "^0.10.11",
     "uuid": "^8.3.2"
