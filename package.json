@@ -48,7 +48,7 @@
   "devDependencies": {
     "@types/commander": "^2.12.2",
     "@types/fs-extra": "^9.0.13",
-    "@types/node": "^16.9.6",
+    "@types/node": "^18.11.7",
     "@types/node-fetch": "^2.5.8",
     "@types/progress": "^2.0.3",
     "@types/unzipper": "^0.10.4",
